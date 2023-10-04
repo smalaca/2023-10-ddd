@@ -7,6 +7,6 @@ public class OrderFactory {
     public Order create(AcceptCartCommand command) {
         OrderNumber orderNumber = OrderNumber.orderNumber(command.buyerId());
 
-        return new Order(orderNumber, command.cartId(), command.asDeliveryMethod(), OrderState.PLACED);
+        return new Order(orderNumber, command.cartId(), command.asDeliveryMethod(), command.asAddress(), OrderState.PLACED);
     }
 }
