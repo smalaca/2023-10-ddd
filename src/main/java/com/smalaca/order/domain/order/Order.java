@@ -2,6 +2,7 @@ package com.smalaca.order.domain.order;
 
 import com.smalaca.annotation.ddd.AggregateRoot;
 import com.smalaca.annotation.ddd.Factory;
+import com.smalaca.order.domain.deliverymethod.DeliveryMethod;
 import com.smalaca.order.domain.price.Price;
 
 import java.util.List;

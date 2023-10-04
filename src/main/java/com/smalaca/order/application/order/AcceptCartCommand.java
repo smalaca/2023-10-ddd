@@ -3,7 +3,7 @@ package com.smalaca.order.application.order;
 import com.smalaca.order.domain.order.AcceptCartDomainCommand;
 import com.smalaca.order.domain.order.Address;
 import com.smalaca.order.domain.order.Amount;
-import com.smalaca.order.domain.order.DeliveryMethod;
+import com.smalaca.order.domain.deliverymethod.DeliveryMethod;
 
 import java.util.HashMap;
 import java.util.Map;

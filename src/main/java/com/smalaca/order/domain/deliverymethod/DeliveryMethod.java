@@ -1,4 +1,4 @@
-package com.smalaca.order.domain.order;
+package com.smalaca.order.domain.deliverymethod;
 
 import com.google.common.collect.ImmutableList;
 import com.smalaca.annotation.ddd.Factory;
