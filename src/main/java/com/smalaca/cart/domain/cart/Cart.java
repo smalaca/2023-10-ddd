@@ -17,7 +17,7 @@ public class Cart {
         this.buyerId = buyerId;
     }
 
-    public void addProducts(Map<UUID, Amount> products) {
+    public void addProducts(Map<UUID, Amount> products, ProductManagementService productManagementService) {
         products.forEach((id, amount) -> {
             Optional<CartPosition> found = positions.stream().filter(position -> position.isFor(id)).findFirst();
 
@@ -28,10 +28,24 @@ public class Cart {
             }
         });
 
-        Amount totalAmount = positions.stream().map(CartPosition::getAmount).reduce(Amount.ZERO, Amount::increase);
-
-        if (totalAmount.greaterThan(20)) {
-            throw CartException.totalAmountExceeded(totalAmount);
+        if (isTotalAmountExceeded()) {
+            throw CartException.totalAmountExceeded(totalAmount());
         }
+
+        boolean response = productManagementService.book(products);
+
+        if (!response) {
+            throw CartException.couldNotBookAllProducts(products);
+        }
+    }
+
+    private boolean isTotalAmountExceeded() {
+        return totalAmount().greaterThan(20);
+    }
+
+    private Amount totalAmount() {
+        return positions.stream()
+                .map(CartPosition::getAmount)
+                .reduce(Amount.ZERO, Amount::increase);
     }
 }
