@@ -4,7 +4,7 @@ import com.smalaca.annotation.ddd.Factory;
 import com.smalaca.annotation.ddd.ValueObject;
 
 @ValueObject
-class Amount {
+public class Amount {
     private final int value;
 
     private Amount(int value) {
@@ -12,11 +12,15 @@ class Amount {
     }
 
     @Factory
-    static Amount amount(int value) {
+    public static Amount amount(int value) {
         if (value < 1) {
             throw new AmountException(value);
         }
 
         return new Amount(value);
+    }
+
+    Amount increase(Amount amount) {
+        return new Amount(this.value + amount.value);
     }
 }

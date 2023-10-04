@@ -5,6 +5,7 @@ import com.smalaca.annotation.ddd.AggregateRoot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @AggregateRoot
@@ -16,11 +17,15 @@ public class Cart {
         this.buyerId = buyerId;
     }
 
-    public void addProducts(Map<UUID, Integer> products) {
+    public void addProducts(Map<UUID, Amount> products) {
         products.forEach((id, amount) -> {
-            // zwiększyć ilość produktu, jeżeli istnieje odpowiednia pozycja
+            Optional<CartPosition> found = positions.stream().filter(position -> position.isFor(id)).findFirst();
 
-            positions.add(CartPosition.create(id, amount));
+            if (found.isPresent()) {
+                found.get().increase(amount);
+            } else {
+                positions.add(new CartPosition(id, amount));
+            }
         });
 
         // ilość produktów nie większa niż 20
