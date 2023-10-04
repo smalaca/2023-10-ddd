@@ -1,4 +1,4 @@
-package com.smalaca.order.domain.order;
+package com.smalaca.order.domain.address;
 
 import com.smalaca.annotation.ddd.ValueObject;
 

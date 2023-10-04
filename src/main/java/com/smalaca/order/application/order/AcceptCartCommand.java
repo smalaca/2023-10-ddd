@@ -1,7 +1,7 @@
 package com.smalaca.order.application.order;
 
 import com.smalaca.order.domain.order.AcceptCartDomainCommand;
-import com.smalaca.order.domain.order.Address;
+import com.smalaca.order.domain.address.Address;
 import com.smalaca.order.domain.order.Amount;
 import com.smalaca.order.domain.deliverymethod.DeliveryMethod;
 

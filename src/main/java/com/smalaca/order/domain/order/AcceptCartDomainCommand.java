@@ -1,5 +1,6 @@
 package com.smalaca.order.domain.order;
 
+import com.smalaca.order.domain.address.Address;
 import com.smalaca.order.domain.deliverymethod.DeliveryMethod;
 
 import java.util.Map;
