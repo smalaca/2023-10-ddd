@@ -13,7 +13,7 @@ public class OrderApplicationService {
     }
 
     public void acceptCart(UUID cartId, UUID deliveryMethodId) {
-        Order order = new Order(cartId, deliveryMethodId);
+        Order order = Order.create(cartId, deliveryMethodId);
 
         orderRepository.save(order);
     }
