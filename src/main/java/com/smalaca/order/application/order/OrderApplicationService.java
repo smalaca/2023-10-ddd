@@ -1,5 +1,6 @@
 package com.smalaca.order.application.order;
 
+import com.smalaca.order.domain.eventpublisher.EventPublisher;
 import com.smalaca.order.domain.order.AcceptCartDomainCommand;
 import com.smalaca.order.domain.order.Order;
 import com.smalaca.order.domain.order.OrderFactory;
@@ -8,10 +9,13 @@ import com.smalaca.order.domain.order.OrderRepository;
 import java.util.UUID;
 
 public class OrderApplicationService {
+    private final EventPublisher eventPublisher;
     private final OrderRepository orderRepository;
     private final OrderFactory orderFactory;
 
-    public OrderApplicationService(OrderRepository orderRepository, OrderFactory orderFactory) {
+    public OrderApplicationService(
+            EventPublisher eventPublisher, OrderRepository orderRepository, OrderFactory orderFactory) {
+        this.eventPublisher = eventPublisher;
         this.orderRepository = orderRepository;
         this.orderFactory = orderFactory;
     }
@@ -19,7 +23,7 @@ public class OrderApplicationService {
     public void acceptCart(UUID buyerId, AcceptCartCommand command) {
         AcceptCartDomainCommand acceptCartCommand = command.asAcceptCartCommand(buyerId);
 
-        Order order = orderFactory.create(acceptCartCommand);
+        Order order = orderFactory.create(acceptCartCommand, eventPublisher);
 
         orderRepository.save(order);
     }

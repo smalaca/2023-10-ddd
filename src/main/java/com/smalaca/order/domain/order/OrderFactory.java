@@ -3,6 +3,7 @@ package com.smalaca.order.domain.order;
 import com.smalaca.annotation.ddd.Factory;
 import com.smalaca.order.domain.cartservice.CartService;
 import com.smalaca.order.domain.deliveryservice.DeliveryService;
+import com.smalaca.order.domain.eventpublisher.EventPublisher;
 import com.smalaca.order.domain.price.Price;
 import com.smalaca.order.domain.productmanagementservice.ProductManagementService;
 import com.smalaca.order.domain.productmanagementservice.ProductPriceResponse;
@@ -20,7 +21,7 @@ public class OrderFactory {
         this.deliveryService = deliveryService;
     }
 
-    public Order create(AcceptCartDomainCommand command) {
+    public Order create(AcceptCartDomainCommand command, EventPublisher eventPublisher) {
         Order.Builder builder = new Order.Builder()
                 .buyerId(command.buyerId())
                 .cartId(command.cartId())
@@ -39,7 +40,7 @@ public class OrderFactory {
 
         return builder
                 .deliveryPrice(deliveryPrice(command))
-                .build();
+                .build(eventPublisher);
     }
 
     private Price deliveryPrice(AcceptCartDomainCommand command) {

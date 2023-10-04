@@ -4,6 +4,7 @@ import com.smalaca.annotation.ddd.AggregateRoot;
 import com.smalaca.annotation.ddd.Factory;
 import com.smalaca.order.domain.address.Address;
 import com.smalaca.order.domain.deliverymethod.DeliveryMethod;
+import com.smalaca.order.domain.eventpublisher.EventPublisher;
 import com.smalaca.order.domain.price.Price;
 
 import java.util.List;
@@ -81,9 +82,11 @@ public class Order {
             return this;
         }
 
-        Order build() {
+        Order build(EventPublisher eventPublisher) {
             orderNumber = OrderNumber.orderNumber(buyerId);
             orderState = OrderState.PLACED;
+
+            eventPublisher.publish(OrderPlaced.create(cartId, orderNumber));
 
             return new Order(this);
         }
