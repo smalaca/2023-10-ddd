@@ -5,6 +5,7 @@ import com.smalaca.cart.domain.cart.Cart;
 import com.smalaca.cart.domain.cart.CartRepository;
 import com.smalaca.cart.domain.eventpublisher.EventPublisher;
 import com.smalaca.cart.domain.productmanagementservice.ProductManagementService;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +23,7 @@ public class CartApplicationService {
         this.eventPublisher = eventPublisher;
     }
 
+    @Transactional
     public void addProducts(UUID cartId, Map<UUID, Integer> products) {
         // 1. tłumaczenie na język domeny [0...*]
         Cart cart = cartRepository.findById(cartId);
@@ -33,6 +35,7 @@ public class CartApplicationService {
         cartRepository.save(cart);
     }
 
+    @Transactional
     public void removeProducts(UUID cartId, Map<UUID, Integer> products) {
         Cart cart = cartRepository.findById(cartId);
         Map<UUID, Amount> productsWithAmount = asProducts(products);
