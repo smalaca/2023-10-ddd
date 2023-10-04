@@ -1,7 +1,9 @@
 package com.smalaca.order.domain.order;
 
 import com.smalaca.annotation.ddd.AggregateRoot;
+import com.smalaca.annotation.ddd.Factory;
 
+import java.util.List;
 import java.util.UUID;
 
 @AggregateRoot
@@ -10,14 +12,16 @@ public class Order {
     private final UUID cartId;
     private final DeliveryMethod deliveryMethod;
     private final Address address;
+    private final List<OrderPosition> orderPositions;
     private OrderState orderState;
 
-    Order(OrderNumber orderNumber, UUID cartId, DeliveryMethod deliveryMethod, Address address, OrderState orderState) {
-        this.orderNumber = orderNumber;
-        this.cartId = cartId;
-        this.deliveryMethod = deliveryMethod;
-        this.address = address;
-        this.orderState = orderState;
+    private Order(Builder builder) {
+        this.orderNumber = builder.orderNumber;
+        this.cartId = builder.cartId;
+        this.deliveryMethod = builder.deliveryMethod;
+        this.address = builder.address;
+        this.orderState = builder.orderState;
+        this.orderPositions = builder.orderPositions;
     }
 
     public void cancel() {
@@ -30,5 +34,47 @@ public class Order {
 
     public void resign() {
         orderState = OrderState.RESIGN;
+    }
+
+    @Factory
+    public static class Builder {
+        private List<OrderPosition> orderPositions;
+        private OrderState orderState;
+        private OrderNumber orderNumber;
+        private UUID buyerId;
+        private UUID cartId;
+        private DeliveryMethod deliveryMethod;
+        private Address address;
+
+        Builder buyerId(UUID buyerId) {
+            this.buyerId = buyerId;
+            return this;
+        }
+
+        Builder cartId(UUID cartId) {
+            this.cartId = cartId;
+            return this;
+        }
+
+        Builder deliveryMethod(DeliveryMethod deliveryMethod) {
+            this.deliveryMethod = deliveryMethod;
+            return this;
+        }
+
+        Builder address(Address address) {
+            this.address = address;
+            return this;
+        }
+
+        void addPosition(UUID productId, Amount amount) {
+            orderPositions.add(new OrderPosition(productId, amount));
+        }
+
+        Order build() {
+            orderNumber = OrderNumber.orderNumber(buyerId);
+            orderState = OrderState.PLACED;
+            
+            return new Order(this);
+        }
     }
 }

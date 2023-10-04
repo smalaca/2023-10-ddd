@@ -5,8 +5,14 @@ import com.smalaca.annotation.ddd.Factory;
 @Factory
 public class OrderFactory {
     public Order create(AcceptCartDomainCommand command) {
-        OrderNumber orderNumber = OrderNumber.orderNumber(command.buyerId());
+        Order.Builder builder = new Order.Builder()
+                .buyerId(command.buyerId())
+                .cartId(command.cartId())
+                .deliveryMethod(command.deliveryMethod())
+                .address(command.address());
 
-        return new Order(orderNumber, command.cartId(), command.deliveryMethod(), command.address(), OrderState.PLACED);
+        command.products().forEach(builder::addPosition);
+
+        return builder.build();
     }
 }
