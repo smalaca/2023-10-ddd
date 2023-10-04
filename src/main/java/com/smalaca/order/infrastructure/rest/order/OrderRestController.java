@@ -1,5 +1,6 @@
 package com.smalaca.order.infrastructure.rest.order;
 
+import com.smalaca.order.domain.order.AcceptCartCommand;
 import com.smalaca.order.application.order.OrderApplicationService;
 
 import java.util.UUID;
@@ -12,7 +13,7 @@ public class OrderRestController {
     }
 
     public void acceptCart(UUID cartId, String deliveryMethod) {
-        orderApplicationService.acceptCart(buyerId(), cartId, deliveryMethod);
+        orderApplicationService.acceptCart(new AcceptCartCommand(buyerId(), cartId, deliveryMethod));
     }
 
     private UUID buyerId() {

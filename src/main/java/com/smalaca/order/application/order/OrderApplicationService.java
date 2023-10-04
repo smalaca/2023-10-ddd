@@ -1,6 +1,6 @@
 package com.smalaca.order.application.order;
 
-import com.smalaca.order.domain.order.DeliveryMethod;
+import com.smalaca.order.domain.order.AcceptCartCommand;
 import com.smalaca.order.domain.order.Order;
 import com.smalaca.order.domain.order.OrderFactory;
 import com.smalaca.order.domain.order.OrderRepository;
@@ -16,10 +16,8 @@ public class OrderApplicationService {
         this.orderFactory = orderFactory;
     }
 
-    public void acceptCart(UUID buyerId, UUID cartId, String deliveryMethod) {
-        DeliveryMethod deliveryMethodVO = DeliveryMethod.deliveryMethod(deliveryMethod);
-
-        Order order = orderFactory.create(buyerId, cartId, deliveryMethodVO);
+    public void acceptCart(AcceptCartCommand command) {
+        Order order = orderFactory.create(command);
 
         orderRepository.save(order);
     }
