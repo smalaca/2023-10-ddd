@@ -11,8 +11,8 @@ public class OrderRestController {
         this.orderApplicationService = orderApplicationService;
     }
 
-    public void acceptCart(UUID cartId, UUID deliveryMethodId) {
-        orderApplicationService.acceptCart(cartId, deliveryMethodId);
+    public void acceptCart(UUID cartId, String deliveryMethod) {
+        orderApplicationService.acceptCart(cartId, deliveryMethod);
     }
 
     public void cancel(UUID orderId) {

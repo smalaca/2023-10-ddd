@@ -8,18 +8,18 @@ import java.util.UUID;
 @AggregateRoot
 public class Order {
     private final UUID cartId;
-    private final UUID deliveryMethodId;
+    private final DeliveryMethod deliveryMethod;
     private OrderState orderState;
 
-    private Order(UUID cartId, UUID deliveryMethodId, OrderState orderState) {
+    private Order(UUID cartId, DeliveryMethod deliveryMethod, OrderState orderState) {
         this.cartId = cartId;
-        this.deliveryMethodId = deliveryMethodId;
+        this.deliveryMethod = deliveryMethod;
         this.orderState = orderState;
     }
 
     @Factory
-    public static Order create(UUID cartId, UUID deliveryMethodId) {
-        return new Order(cartId, deliveryMethodId, OrderState.PLACED);
+    public static Order create(UUID cartId, DeliveryMethod deliveryMethod) {
+        return new Order(cartId, deliveryMethod, OrderState.PLACED);
     }
 
     public void cancel() {

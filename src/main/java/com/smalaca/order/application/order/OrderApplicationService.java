@@ -1,5 +1,6 @@
 package com.smalaca.order.application.order;
 
+import com.smalaca.order.domain.order.DeliveryMethod;
 import com.smalaca.order.domain.order.Order;
 import com.smalaca.order.domain.order.OrderRepository;
 
@@ -12,8 +13,8 @@ public class OrderApplicationService {
         this.orderRepository = orderRepository;
     }
 
-    public void acceptCart(UUID cartId, UUID deliveryMethodId) {
-        Order order = Order.create(cartId, deliveryMethodId);
+    public void acceptCart(UUID cartId, String deliveryMethod) {
+        Order order = Order.create(cartId, DeliveryMethod.deliveryMethod(deliveryMethod));
 
         orderRepository.save(order);
     }
