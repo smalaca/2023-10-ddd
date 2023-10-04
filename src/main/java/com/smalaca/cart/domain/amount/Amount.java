@@ -29,4 +29,8 @@ public class Amount {
     public boolean greaterThan(int value) {
         return this.value > value;
     }
+
+    public Integer getValue() {
+        return value;
+    }
 }
