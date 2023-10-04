@@ -6,11 +6,13 @@ import java.util.UUID;
 
 @AggregateRoot
 public class Order {
+    private final OrderNumber orderNumber;
     private final UUID cartId;
     private final DeliveryMethod deliveryMethod;
     private OrderState orderState;
 
-    Order(UUID cartId, DeliveryMethod deliveryMethod, OrderState orderState) {
+    Order(OrderNumber orderNumber, UUID cartId, DeliveryMethod deliveryMethod, OrderState orderState) {
+        this.orderNumber = orderNumber;
         this.cartId = cartId;
         this.deliveryMethod = deliveryMethod;
         this.orderState = orderState;

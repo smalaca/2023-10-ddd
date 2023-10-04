@@ -16,10 +16,10 @@ public class OrderApplicationService {
         this.orderFactory = orderFactory;
     }
 
-    public void acceptCart(UUID cartId, String deliveryMethod) {
+    public void acceptCart(UUID buyerId, UUID cartId, String deliveryMethod) {
         DeliveryMethod deliveryMethodVO = DeliveryMethod.deliveryMethod(deliveryMethod);
 
-        Order order = orderFactory.create(cartId, deliveryMethodVO);
+        Order order = orderFactory.create(buyerId, cartId, deliveryMethodVO);
 
         orderRepository.save(order);
     }

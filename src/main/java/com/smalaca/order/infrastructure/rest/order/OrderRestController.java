@@ -12,7 +12,12 @@ public class OrderRestController {
     }
 
     public void acceptCart(UUID cartId, String deliveryMethod) {
-        orderApplicationService.acceptCart(cartId, deliveryMethod);
+        orderApplicationService.acceptCart(buyerId(), cartId, deliveryMethod);
+    }
+
+    private UUID buyerId() {
+        // retrieved from session
+        return UUID.randomUUID();
     }
 
     public void cancel(UUID orderId) {
