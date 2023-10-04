@@ -33,4 +33,12 @@ public class OrderApplicationService {
 
         orderRepository.save(order);
     }
+
+    public void resign(UUID orderId) {
+        Order order = orderRepository.findById(orderId);
+
+        order.resign();
+
+        orderRepository.save(order);
+    }
 }

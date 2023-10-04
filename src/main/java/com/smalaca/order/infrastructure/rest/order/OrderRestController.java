@@ -22,4 +22,8 @@ public class OrderRestController {
     public void confirmDeliveryReception(UUID orderId) {
         orderApplicationService.complete(orderId);
     }
+
+    public void resign(UUID orderId) {
+        orderApplicationService.resign(orderId);
+    }
 }

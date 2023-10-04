@@ -22,4 +22,8 @@ public class Order {
     public void complete() {
         orderState = OrderState.COMPLETE;
     }
+
+    public void resign() {
+        orderState = OrderState.RESIGN;
+    }
 }
