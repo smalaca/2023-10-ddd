@@ -14,4 +14,8 @@ public class OrderRestController {
     public void acceptCart(UUID cartId, UUID deliveryMethodId) {
         orderApplicationService.acceptCart(cartId, deliveryMethodId);
     }
+
+    public void cancel(UUID orderId) {
+        orderApplicationService.cancel(orderId);
+    }
 }

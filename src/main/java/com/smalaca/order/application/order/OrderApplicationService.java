@@ -17,4 +17,12 @@ public class OrderApplicationService {
 
         orderRepository.save(order);
     }
+
+    public void cancel(UUID orderId) {
+        Order order = orderRepository.findById(orderId);
+
+        order.cancel();
+
+        orderRepository.save(order);
+    }
 }
