@@ -4,6 +4,7 @@ import com.smalaca.cart.application.cart.CartApplicationService;
 import com.smalaca.cart.query.cart.CartDetails;
 import com.smalaca.cart.query.cart.CartQueryFacade;
 
+import java.util.Map;
 import java.util.UUID;
 
 public class CartRestController {
@@ -19,7 +20,7 @@ public class CartRestController {
         return cartQueryFacade.findById(cartId);
     }
 
-    public void addProducts(UUID cartId, UUID productId) {
-        cartApplicationService.addProducts(cartId, productId);
+    public void addProducts(UUID cartId, Map<UUID, Integer> products) {
+        cartApplicationService.addProducts(cartId, products);
     }
 }
