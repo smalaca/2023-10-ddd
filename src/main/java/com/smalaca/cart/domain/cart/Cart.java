@@ -28,6 +28,10 @@ public class Cart {
             }
         });
 
-        // ilość produktów nie większa niż 20
+        Amount totalAmount = positions.stream().map(CartPosition::getAmount).reduce(Amount.ZERO, Amount::increase);
+
+        if (totalAmount.greaterThan(20)) {
+            throw CartException.totalAmountExceeded(totalAmount);
+        }
     }
 }

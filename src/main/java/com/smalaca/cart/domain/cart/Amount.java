@@ -5,6 +5,7 @@ import com.smalaca.annotation.ddd.ValueObject;
 
 @ValueObject
 public class Amount {
+    static final Amount ZERO = new Amount(0);
     private final int value;
 
     private Amount(int value) {
@@ -20,7 +21,12 @@ public class Amount {
         return new Amount(value);
     }
 
+    @Factory
     Amount increase(Amount amount) {
         return new Amount(this.value + amount.value);
+    }
+
+    boolean greaterThan(int value) {
+        return this.value > value;
     }
 }

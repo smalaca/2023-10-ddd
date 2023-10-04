@@ -21,4 +21,8 @@ class CartPosition {
     void increase(Amount amount) {
         this.amount = this.amount.increase(amount);
     }
+
+    Amount getAmount() {
+        return amount;
+    }
 }
