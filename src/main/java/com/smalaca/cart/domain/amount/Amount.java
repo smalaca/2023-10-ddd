@@ -1,11 +1,11 @@
-package com.smalaca.cart.domain.cart;
+package com.smalaca.cart.domain.amount;
 
 import com.smalaca.annotation.ddd.Factory;
 import com.smalaca.annotation.ddd.ValueObject;
 
 @ValueObject
 public class Amount {
-    static final Amount ZERO = new Amount(0);
+    public static final Amount ZERO = new Amount(0);
     private final int value;
 
     private Amount(int value) {
@@ -22,11 +22,11 @@ public class Amount {
     }
 
     @Factory
-    Amount increase(Amount amount) {
+    public Amount increase(Amount amount) {
         return new Amount(this.value + amount.value);
     }
 
-    boolean greaterThan(int value) {
+    public boolean greaterThan(int value) {
         return this.value > value;
     }
 }

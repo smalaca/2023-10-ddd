@@ -1,6 +1,8 @@
 package com.smalaca.cart.domain.cart;
 
 import com.smalaca.annotation.ddd.AggregateRoot;
+import com.smalaca.cart.domain.amount.Amount;
+import com.smalaca.cart.domain.productmanagementservice.ProductManagementService;
 
 import java.util.ArrayList;
 import java.util.List;

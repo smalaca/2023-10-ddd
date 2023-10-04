@@ -1,5 +1,7 @@
 package com.smalaca.cart.domain.cart;
 
+import com.smalaca.cart.domain.amount.Amount;
+
 import java.util.Map;
 import java.util.UUID;
 

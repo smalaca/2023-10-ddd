@@ -1,7 +1,7 @@
 package com.smalaca.cart.infrastructure.productmanagement;
 
-import com.smalaca.cart.domain.cart.Amount;
-import com.smalaca.cart.domain.cart.ProductManagementService;
+import com.smalaca.cart.domain.amount.Amount;
+import com.smalaca.cart.domain.productmanagementservice.ProductManagementService;
 
 import java.util.Map;
 import java.util.UUID;

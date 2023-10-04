@@ -1,6 +1,7 @@
 package com.smalaca.cart.domain.cart;
 
 import com.smalaca.annotation.ddd.DomainEntity;
+import com.smalaca.cart.domain.amount.Amount;
 
 import java.util.UUID;
 

@@ -1,9 +1,9 @@
 package com.smalaca.cart.application.cart;
 
-import com.smalaca.cart.domain.cart.Amount;
+import com.smalaca.cart.domain.amount.Amount;
 import com.smalaca.cart.domain.cart.Cart;
 import com.smalaca.cart.domain.cart.CartRepository;
-import com.smalaca.cart.domain.cart.ProductManagementService;
+import com.smalaca.cart.domain.productmanagementservice.ProductManagementService;
 
 import java.util.HashMap;
 import java.util.Map;
