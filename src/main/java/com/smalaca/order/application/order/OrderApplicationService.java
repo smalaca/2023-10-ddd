@@ -25,4 +25,12 @@ public class OrderApplicationService {
 
         orderRepository.save(order);
     }
+
+    public void complete(UUID orderId) {
+        Order order = orderRepository.findById(orderId);
+
+        order.complete();
+
+        orderRepository.save(order);
+    }
 }

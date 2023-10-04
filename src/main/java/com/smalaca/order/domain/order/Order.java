@@ -18,4 +18,8 @@ public class Order {
     public void cancel() {
         orderState = OrderState.CANCEL;
     }
+
+    public void complete() {
+        orderState = OrderState.COMPLETE;
+    }
 }

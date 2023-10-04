@@ -1,5 +1,5 @@
 package com.smalaca.order.domain.order;
 
 enum OrderState {
-    CANCEL
+    COMPLETE, CANCEL
 }

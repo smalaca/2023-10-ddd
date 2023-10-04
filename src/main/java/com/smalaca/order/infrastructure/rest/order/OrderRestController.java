@@ -18,4 +18,8 @@ public class OrderRestController {
     public void cancel(UUID orderId) {
         orderApplicationService.cancel(orderId);
     }
+
+    public void confirmDeliveryReception(UUID orderId) {
+        orderApplicationService.complete(orderId);
+    }
 }
