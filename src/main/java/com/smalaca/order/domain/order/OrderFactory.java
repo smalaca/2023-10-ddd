@@ -4,9 +4,9 @@ import com.smalaca.annotation.ddd.Factory;
 
 @Factory
 public class OrderFactory {
-    public Order create(AcceptCartCommand command) {
+    public Order create(AcceptCartDomainCommand command) {
         OrderNumber orderNumber = OrderNumber.orderNumber(command.buyerId());
 
-        return new Order(orderNumber, command.cartId(), command.asDeliveryMethod(), command.asAddress(), OrderState.PLACED);
+        return new Order(orderNumber, command.cartId(), command.deliveryMethod(), command.address(), OrderState.PLACED);
     }
 }
