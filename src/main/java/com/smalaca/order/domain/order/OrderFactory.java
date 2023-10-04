@@ -2,6 +2,8 @@ package com.smalaca.order.domain.order;
 
 import com.smalaca.annotation.ddd.Factory;
 import com.smalaca.order.domain.cartservice.CartService;
+import com.smalaca.order.domain.deliveryservice.DeliveryService;
+import com.smalaca.order.domain.price.Price;
 import com.smalaca.order.domain.productmanagementservice.ProductManagementService;
 import com.smalaca.order.domain.productmanagementservice.ProductPriceResponse;
 
@@ -9,10 +11,13 @@ import com.smalaca.order.domain.productmanagementservice.ProductPriceResponse;
 public class OrderFactory {
     private final CartService cartService;
     private final ProductManagementService productManagementService;
+    private final DeliveryService deliveryService;
 
-    public OrderFactory(CartService cartService, ProductManagementService productManagementService) {
+    public OrderFactory(
+            CartService cartService, ProductManagementService productManagementService, DeliveryService deliveryService) {
         this.cartService = cartService;
         this.productManagementService = productManagementService;
+        this.deliveryService = deliveryService;
     }
 
     public Order create(AcceptCartDomainCommand command) {
@@ -32,6 +37,12 @@ public class OrderFactory {
             builder.addPosition(productId, amount, response.priceFor(productId));
         });
 
-        return builder.build();
+        return builder
+                .deliveryPrice(deliveryPrice(command))
+                .build();
+    }
+
+    private Price deliveryPrice(AcceptCartDomainCommand command) {
+        return deliveryService.priceForDelivery(command.deliveryMethod(), command.address());
     }
 }

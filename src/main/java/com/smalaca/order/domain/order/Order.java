@@ -14,6 +14,7 @@ public class Order {
     private final DeliveryMethod deliveryMethod;
     private final Address address;
     private final List<OrderPosition> orderPositions;
+    private final Price deliveryPrice;
     private OrderState orderState;
 
     private Order(Builder builder) {
@@ -23,6 +24,7 @@ public class Order {
         this.address = builder.address;
         this.orderState = builder.orderState;
         this.orderPositions = builder.orderPositions;
+        this.deliveryPrice = builder.deliveryPrice;
     }
 
     public void cancel() {
@@ -46,6 +48,7 @@ public class Order {
         private UUID cartId;
         private DeliveryMethod deliveryMethod;
         private Address address;
+        private Price deliveryPrice;
 
         Builder buyerId(UUID buyerId) {
             this.buyerId = buyerId;
@@ -71,10 +74,15 @@ public class Order {
             orderPositions.add(new OrderPosition(productId, amount, price));
         }
 
+        Builder deliveryPrice(Price deliveryPrice) {
+            this.deliveryPrice = deliveryPrice;
+            return this;
+        }
+
         Order build() {
             orderNumber = OrderNumber.orderNumber(buyerId);
             orderState = OrderState.PLACED;
-            
+
             return new Order(this);
         }
     }
