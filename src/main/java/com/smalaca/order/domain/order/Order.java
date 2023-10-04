@@ -2,6 +2,7 @@ package com.smalaca.order.domain.order;
 
 import com.smalaca.annotation.ddd.AggregateRoot;
 import com.smalaca.annotation.ddd.Factory;
+import com.smalaca.order.domain.price.Price;
 
 import java.util.List;
 import java.util.UUID;
@@ -66,8 +67,8 @@ public class Order {
             return this;
         }
 
-        void addPosition(UUID productId, Amount amount) {
-            orderPositions.add(new OrderPosition(productId, amount));
+        void addPosition(UUID productId, Amount amount, Price price) {
+            orderPositions.add(new OrderPosition(productId, amount, price));
         }
 
         Order build() {
